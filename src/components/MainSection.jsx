@@ -1,12 +1,21 @@
 import './MainSection.css'
 import {useState} from 'react'
 
-export default function Main() {
+export default function MainSection() {
     const [meme, setMeme] = useState({
         topText: "One does not simply",
-        bottonText: "Walk into Mordor",
+        bottomText: "Walk into Moiroor",
         imageUrl: "http://i.imgflip.com/1bij.jpg"
     })
+
+    function handleChange(event){
+        const {value, name} = event.currentTarget
+        setMeme(prev => ({
+            ...prev,
+            [name]: value
+        }))
+        console.log(meme)
+    }
     
     return (
         <main>
@@ -16,6 +25,8 @@ export default function Main() {
                         type="text"
                         placeholder="One does not simply"
                         name="topText"
+                        onChange={handleChange}
+                        value={meme.topText}
                     />
                 </label>
 
@@ -24,6 +35,8 @@ export default function Main() {
                         type="text"
                         placeholder="Walk into Mordor"
                         name="bottomText"
+                        onChange={handleChange}
+                        value={meme.bottomText}
                     />
                 </label>
                 <button>Get a new meme image 🖼</button>
@@ -31,7 +44,7 @@ export default function Main() {
             <div className="meme">
                 <img src={meme.imageUrl} />
                 <span className="top">{meme.topText}</span>
-                <span className="bottom">{meme.bottonText}</span>
+                <span className="bottom">{meme.bottomText}</span>
             </div>
         </main>
     )
