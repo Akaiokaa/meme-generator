@@ -1,5 +1,5 @@
 import './MainSection.css'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 export default function MainSection() {
     const [meme, setMeme] = useState({
@@ -7,6 +7,13 @@ export default function MainSection() {
         bottomText: "Walk into Moiroor",
         imageUrl: "http://i.imgflip.com/1bij.jpg"
     })
+    const[allMemes, setAllMemes] = useState([])
+    
+    useEffect(() => {
+        fetch("https://api.imgflip.com/get_memes")
+        .then(res => res.json())
+        .then(data => console.log(data.data.memes))
+    },[])
 
     function handleChange(event){
         const {value, name} = event.currentTarget
@@ -16,7 +23,7 @@ export default function MainSection() {
         }))
         console.log(meme)
     }
-    
+  
     return (
         <main>
             <div className="form">
